@@ -36,7 +36,7 @@ func (h *FileHandler) List(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *FileHandler) Download(w http.ResponseWriter, r *http.Request) {
-	name := r.PathValue("name")
+	name := strings.TrimPrefix(r.URL.Path, "/api/files/")
 	log.Printf("Download request: name=%s", name)
 
 	safeName := filepath.Base(name)
@@ -191,7 +191,7 @@ func (h *FileHandler) EditorCallback(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *FileHandler) Preview(w http.ResponseWriter, r *http.Request) {
-	name := r.PathValue("name")
+	name := strings.TrimPrefix(r.URL.Path, "/api/files/preview/")
 	if name == "" {
 		writeError(w, http.StatusBadRequest, "file name is required")
 		return

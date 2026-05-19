@@ -12,14 +12,14 @@
 <body>
     <div id="placeholder"></div>
     <script>
-        // При использовании JWT токен передаётся вторым аргументом в DocEditor
+        // При использовании JWT токен передаётся ВТОРЫМ аргументом в DocEditor
         var token = "{{.Token}}";
         
         // Пустой конфиг, так как все данные содержатся в JWT-токене
         var config = {};
         
-        // Создаём редактор - токен передаётся отдельным параметром
-        new DocsAPI.DocEditor('placeholder', config, token);
+        // Создаём редактор - токен передаётся ВТОРЫМ параметром (не третьим!)
+        new DocsAPI.DocEditor('placeholder', token);
     </script>
 </body>
 </html>

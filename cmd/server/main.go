@@ -18,7 +18,7 @@ import (
 	"contract/internal/handler"
 	"contract/internal/service"
 
-	"github.com/golang-jwt/jwt/v5"
+	"github.com/golang-jwt/jwt"
 	"github.com/joho/godotenv"
 )
 
@@ -82,7 +82,7 @@ func main() {
 
 	// Страница редактора – генерирует подписанный конфиг
 	mux.HandleFunc("GET /editor-page/{name}", func(w http.ResponseWriter, r *http.Request) {
-		fileName := r.PathValue("name")
+		fileName := strings.TrimPrefix(r.URL.Path, "/editor-page/")
 		if fileName == "" {
 			http.Error(w, "file name is required", http.StatusBadRequest)
 			return
@@ -134,6 +134,9 @@ func main() {
 			"height": "100%",
 			"width":  "100%",
 		}
+
+		log.Printf("Editor page: fileName=%s, fileURL=%s, callbackURL=%s", fileName, fileURL, callbackURL)
+		log.Printf("JWT config: %+v", jwtConfig)
 
 		jwtSecret := os.Getenv("ONLYOFFICE_JWT_SECRET")
 		if jwtSecret == "" {
