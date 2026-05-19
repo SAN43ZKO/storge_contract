@@ -12,6 +12,9 @@
 <body>
     <div id="placeholder"></div>
     <script>
+        // Токен нужно передавать отдельно от основного конфига
+        var token = "{{.Token}}";
+        
         var cfg = {
             document: {
                 fileType: "{{.FileType}}",
@@ -45,10 +48,11 @@
                 }
             },
             height: "100%",
-            width: "100%",
-            token: "{{.Token}}"
+            width: "100%"
         };
-        new DocsAPI.DocEditor('placeholder', cfg);
+        
+        // Создаём редактор с токеном как вторым аргументом
+        new DocsAPI.DocEditor('placeholder', cfg, token);
     </script>
 </body>
 </html>
