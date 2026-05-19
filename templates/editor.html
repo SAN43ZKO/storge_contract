@@ -12,47 +12,15 @@
 <body>
     <div id="placeholder"></div>
     <script>
-        // Токен нужно передавать отдельно от основного конфига
+        // При включенном JWT в ONLYOFFICE, токен должен содержать весь конфиг
+        // и передаваться как второй аргумент (замещая обычный конфиг)
         var token = "{{.Token}}";
         
-        var cfg = {
-            document: {
-                fileType: "{{.FileType}}",
-                key: "{{.Key}}",
-                title: "{{.FileName}}",
-                url: "{{.FileURL}}",
-                permissions: {
-                    comment: true,
-                    copy: true,
-                    download: true,
-                    edit: true,
-                    print: true,
-                    fillForms: true,
-                    modifyContentControl: true,
-                    modifyFilter: true,
-                    review: true,
-                    deleteCommentAuthorOnly: false,
-                    editCommentAuthorOnly: false
-                }
-            },
-            editorConfig: {
-                mode: "edit",
-                lang: "ru",
-                callbackUrl: "{{.CallbackURL}}",
-                user: {
-                    id: "user1",
-                    name: "User"
-                },
-                customization: {
-                    forcesave: true
-                }
-            },
-            height: "100%",
-            width: "100%"
-        };
+        // Пустой конфиг - всё уже зашито в токен
+        var cfg = {};
         
-        // Создаём редактор с токеном как вторым аргументом
-        new DocsAPI.DocEditor('placeholder', cfg, token);
+        // Создаём редактор - токен передаём как второй аргумент
+        new DocsAPI.DocEditor('placeholder', token);
     </script>
 </body>
 </html>
