@@ -12,18 +12,14 @@
 <body>
     <div id="placeholder"></div>
     <script>
-        // При включенном JWT в ONLYOFFICE, токен должен быть передан в параметре token
+        // При использовании JWT токен передаётся вторым аргументом в DocEditor
         var token = "{{.Token}}";
         
-        // Конфигурация редактора - минимальная, так как основные данные в токене
-        var cfg = {
-            document: {},
-            editorConfig: {},
-            token: token
-        };
+        // Пустой конфиг, так как все данные содержатся в JWT-токене
+        var config = {};
         
-        // Создаём редактор - передаём конфиг с токеном
-        new DocsAPI.DocEditor('placeholder', cfg);
+        // Создаём редактор - токен передаётся отдельным параметром
+        new DocsAPI.DocEditor('placeholder', config, token);
     </script>
 </body>
 </html>
