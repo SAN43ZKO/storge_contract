@@ -82,7 +82,7 @@ func main() {
 
 	// Страница редактора – генерирует подписанный конфиг
 	mux.HandleFunc("GET /editor-page/{name}", func(w http.ResponseWriter, r *http.Request) {
-		fileName := strings.TrimPrefix(r.URL.Path, "/editor-page/")
+		fileName := r.PathValue("name")
 		if fileName == "" {
 			http.Error(w, "file name is required", http.StatusBadRequest)
 			return
