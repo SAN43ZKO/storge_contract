@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ONLYOFFICE Editor</title>
+    <script src="http://localhost:8082/web-apps/apps/api/documents/api.js"></script>
+    <style>
+        html, body { margin:0; padding:0; width:100%; height:100%; }
+        #placeholder { width:100%; height:100%; }
+    </style>
+</head>
+<body>
+    <div id="placeholder"></div>
+    <script>
+        var cfg = {
+            document: {
+                fileType: "{{.FileType}}",
+                key: "{{.Key}}",
+                title: "{{.FileName}}",
+                url: "{{.FileURL}}",
+                permissions: {
+                    comment: true,
+                    copy: true,
+                    download: true,
+                    edit: true,
+                    print: true,
+                    fillForms: true,
+                    modifyContentControl: true,
+                    modifyFilter: true,
+                    review: true,
+                    deleteCommentAuthorOnly: false,
+                    editCommentAuthorOnly: false
+                }
+            },
+            editorConfig: {
+                mode: "edit",
+                lang: "ru",
+                callbackUrl: "{{.CallbackURL}}",
+                user: {
+                    id: "user1",
+                    name: "User"
+                },
+                customization: {
+                    forcesave: true
+                }
+            },
+            height: "100%",
+            width: "100%",
+            token: "{{.Token}}"
+        };
+        new DocsAPI.DocEditor('placeholder', cfg);
+    </script>
+</body>
+</html>
